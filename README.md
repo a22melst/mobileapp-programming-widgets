@@ -1,42 +1,86 @@
+    
+**Rapport**
 
-# Rapport
-
-**Skriv din rapport här!**
-
-_Du kan ta bort all text som finns sedan tidigare_.
-
-## Följande grundsyn gäller dugga-svar:
-
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
-
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
+Det första jag gjorde var navigera till filen activity_main.xml och lägga till en 
+LinearLayout. Jag valde denna eftersom jag är nybörjare på layouts och den är lättare att förstå
+än ConstraintLayout. 
 
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
-    }
-}
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context=".MainActivity">
+```
+Layoutens orientering är vertikal, vilket innebär att ordningen views läggs till är uppifrån och ner.
+
+Min idé var att skapa någon typ av profilsida, så det första jag la till var en ImageView för profilbilden.
+På höjden tar dem upp så mycket plats bilden behöver, medan den på bredden matchar layouten, vilket här
+innebär att den tar upp hela skärmens bredd.
+Jag använder layout_marginTop för att se till att det finns rum mellan toppen av bilden och toolbaren.
+
+```
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:contentDescription="@string/image_description" />
+```
+För att få in själva bilden, lägger jag in den i mappen drawable. Därefter går jag över till MainActivity.java ,
+där jag skapar ett ImageView och ett Drawable objekt. Imageview objektet definierar jag med hjälp
+av findViewById och hämtar då min ImageView ifrån actvity.main med hjälp av dess ID som helt enekelt är "imageView". 
+Inuti drawable objektet förvaras profilbilden, vilket hämtas som koden här under visar.
+Till sist lägger jag till drawable på Imageview, vilket resulterar i att bilden visas.
+
+```
+//Profilbild
+imageView = findViewById(R.id.imageView);
+drawable = getResources().getDrawable(R.drawable.profilepic);
+imageView.setImageDrawable(drawable);
 ```
 
-Bilder läggs i samma mapp som markdown-filen.
+Under profilbilden finns en TextView som innehåller ett namn. Även här används layout_width och layout_height
+samt layout_marginTop på liknande sätt som med bilden. Även kommandot android:gravity="center" används för att positionera
+texten i mitten av skärmen. 
 
-![](android.png)
+```
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="@string/profile_name"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+```
 
-Läs gärna:
+Under texten finns ett antal knappar i olika färger. Även med dessa är det ingen märkvärdig skillnad
+i användadet av layout_width, layout_height och layout_marginTop. Här används dock även layout_marginHorizontal, 
+för att ge rum mellan knapparna och skärmens kant, på både vänster och höger sida. android:bakground tillsammans
+med en färgkod i hexadecimal.
+```
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:layout_marginHorizontal="15dp"
+        android:background="#FF82AD"
+        android:layout_gravity="center"
+        android:text="@string/pink_button" />
+```
 
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+På den sista, röda knappen, la jag även till kod som gör texten större.
+```
+android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+```
+
+Alla strings är extraherade till filen strings.xml baserat på förslag från Android Studio.
+
+**Screenshot**
+
+![](screenshot.png)
+
+

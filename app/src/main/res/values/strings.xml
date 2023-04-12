@@ -4,4 +4,6 @@
     <string name="image_description">Profile picture</string>
     <string name="pink_button">Pink Button</string>
     <string name="blue_button">Blue Button</string>
+    <string name="lime_button">Lime Button</string>
+    <string name="red_button">Red Button</string>
 </resources>
