@@ -2,4 +2,6 @@
     <string name="app_name">Widgets</string>
     <string name="profile_name">Rutger Andersson</string>
     <string name="image_description">Profile picture</string>
+    <string name="pink_button">Pink Button</string>
+    <string name="blue_button">Blue Button</string>
 </resources>
